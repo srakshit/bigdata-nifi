@@ -31,5 +31,3 @@ VOLUME ["${NIFI_HOME}/database_repository", \
         "${NIFI_HOME}/flowfile_repository", \
         "${NIFI_HOME}/content_repository", \
         "${NIFI_HOME}/provenance_repository"]
-
-EXPOSE 8080 8081 8082 9001
