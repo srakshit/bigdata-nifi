@@ -14,7 +14,7 @@ RUN curl ${DIST_MIRROR}/${HDF_VERSION}/nifi-${NIFI_VERSION}.${HDF_VERSION}-10-bi
 	&& sh -c "mkdir -p ${NIFI_HOME}/{database_repository,flowfile_repository,content_repository,provenance_repository}" \
     && addgroup nifi \
    	&& adduser -S -G nifi nifi \
-	&& chown nifi:nifi -hR /opt/ \
+	&& chown nifi:nifi -R /opt/ \
 	&& chmod 754 /opt/
 
 # These are the volumes (in order) for the following:
