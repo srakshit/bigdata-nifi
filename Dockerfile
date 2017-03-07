@@ -9,7 +9,7 @@ ENV DIST_MIRROR="https://public-repo-1.hortonworks.com/HDF" \
 
 
 RUN curl ${DIST_MIRROR}/${HDF_VERSION}/nifi-${NIFI_VERSION}.${HDF_VERSION}-10-bin.tar.gz | tar xz -C /opt \
-    && ln -s /opt/nifi-${NIFI_VERSION}.${HDF_VERSION}-10-bin ${NIFI_HOME} \
+    && ln -s /opt/nifi-${NIFI_VERSION}.${HDF_VERSION}-10 ${NIFI_HOME} \
 	&& sed -i -e "s|^nifi.ui.banner.text=.*$|nifi.ui.banner.text=Docker NiFi ${NIFI_VERSION}|" ${NIFI_HOME}/conf/nifi.properties \
 	&& sh -c "mkdir -p ${NIFI_HOME}/{database_repository,flowfile_repository,content_repository,provenance_repository}" \
     && addgroup nifi \
