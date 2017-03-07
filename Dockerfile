@@ -29,6 +29,4 @@ VOLUME ["${NIFI_HOME}/database_repository", \
         "${NIFI_HOME}/content_repository", \
         "${NIFI_HOME}/provenance_repository"]
 
-USER nifi
-
 EXPOSE 8080 8081 8082 9001
