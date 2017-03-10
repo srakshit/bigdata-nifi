@@ -4,21 +4,24 @@ MAINTAINER Subham Rakshit
 
 ENV DIST_MIRROR="https://public-repo-1.hortonworks.com/HDF" \
     NIFI_HOME="/opt/nifi" \
-	HDF_VERSION="2.1.2.0" \
-	NIFI_VERSION="1.1.0"
+    HDF_VERSION="2.1.2.0" \
+    NIFI_VERSION="1.1.0"
 
+ADD ./nifi-properties.sh /opt/
 
 RUN curl ${DIST_MIRROR}/${HDF_VERSION}/nifi-${NIFI_VERSION}.${HDF_VERSION}-10-bin.tar.gz | tar xz -C /opt \
     && ln -s /opt/nifi-${NIFI_VERSION}.${HDF_VERSION}-10 ${NIFI_HOME} \
-	&& sed -i -e "s|^nifi.ui.banner.text=.*$|nifi.ui.banner.text=Docker NiFi ${NIFI_VERSION}|" ${NIFI_HOME}/conf/nifi.properties \
-	&& mkdir -p ${NIFI_HOME}/database_repository \
-	&& mkdir -p ${NIFI_HOME}/flowfile_repository \
-	&& mkdir -p ${NIFI_HOME}/content_repository \
-	&& mkdir -p ${NIFI_HOME}/provenance_repository \
+    && sed -i -e "s|^nifi.ui.banner.text=.*$|nifi.ui.banner.text=Docker NiFi ${NIFI_VERSION}|" ${NIFI_HOME}/conf/nifi.properties \
+    && mkdir -p ${NIFI_HOME}/database_repository \
+    && mkdir -p ${NIFI_HOME}/flowfile_repository \
+    && mkdir -p ${NIFI_HOME}/content_repository \
+    && mkdir -p ${NIFI_HOME}/provenance_repository \
     && addgroup nifi \
-   	&& adduser -S -G nifi nifi \
-	&& chown nifi:nifi -R /opt/ \
-	&& chmod 754 /opt/
+    && adduser -S -G nifi nifi \
+    && chown nifi:nifi -R /opt/ \
+    && chmod 754 /opt/ \
+    && chown nifi:nifi -R /opt/nifi-* \
+    && chmod 754 /opt/nifi-*
 
 # These are the volumes (in order) for the following:
 # 1) user access and flow controller history
